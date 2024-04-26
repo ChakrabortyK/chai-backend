@@ -13,15 +13,14 @@ const uploadCloud = async (file) => {
         if (!file) return null;
         // throw some error here
 
+        // console.log("Utils::Cloud::uploadCloud::file:", file);
         const response = await cloudinary.uploader.upload(file, {
             resource_type: "auto",
         });
-        //print the response
-        // console.log("Utils::Cloud::uploadCloud::file upload ", response);
         fs.unlinkSync(file);
         return response;
     } catch (error) {
-        fs.unlink(file);
+        fs.unlinkSync(file);
         console.log("Utils::Cloud::uploadCloud::file upload error:", error);
     }
 };

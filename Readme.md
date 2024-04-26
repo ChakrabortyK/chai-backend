@@ -13,10 +13,8 @@ This is a video series on backend with javascript
 
 -   [Multer](https://www.npmjs.com/package/multer)
 -   [Multer Documentation](https://www.npmjs.com/package/multer)
--   [Multer Documentation](https://www.npmjs.com/package/multer)
 
 ### 2. Cloudinary
 
 -   [Cloudinary](https://cloudinary.com/)
--   [Cloudinary Documentation](https://cloudinary.com/documentation)
 -   [Cloudinary Documentation](https://cloudinary.com/documentation)
