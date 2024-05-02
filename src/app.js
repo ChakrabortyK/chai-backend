@@ -38,7 +38,6 @@ import userRouter from "./routes/user.route.js";
 app.get("/test", async (req, res) => {
     res.send("test api success");
 });
-
 app.use("/api/v1/users", userRouter);
 
 export { app };

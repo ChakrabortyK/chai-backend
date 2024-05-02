@@ -8,7 +8,7 @@ const userSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            lowecase: true,
+            lowercase: true,
             trim: true,
             index: true,
         },
@@ -16,7 +16,7 @@ const userSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            lowecase: true,
+            lowercase: true,
             trim: true,
         },
         fullName: {
@@ -59,6 +59,8 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.methods.comparePassword = async function (password) {
+    // console.log("uesrScema::bcrypt::thispassword", this.password);
+    // console.log("uesrScema::bcrypt::password", password);
     return await bcrypt.compare(password, this.password);
 };
 
