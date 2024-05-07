@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import { errorMdw } from "./middleware/error.mdw.js";
 
 const app = express();
 
@@ -40,4 +41,5 @@ app.get("/test", async (req, res) => {
 });
 app.use("/api/v1/users", userRouter);
 
+app.use(errorMdw);
 export { app };

@@ -8,12 +8,13 @@ import {
     getAllUser,
     refreshAccessToken,
     changeCurrentPassword,
-    getCurrentUser,
     updateAccountDetails,
     updateUserCoverImage,
     updateUserAvatar,
     getUserChannelProfile,
     getWatchHistory,
+    getCurrentUserByUsername,
+    getCurrentUserAuth,
 } from "../controllers/user.controller.js";
 
 const router = Router();
@@ -34,15 +35,15 @@ router.route("/register").post(
 router.route("/login").post(loginUser);
 
 //SECURED ROUTES (AUTHED)
-router.route("/logout").post(authJWT, logoutUser);
-router.route("/rftoken").post(refreshAccessToken);
-router.route("/getuser").get(authJWT, getCurrentUser);
-router.route("/updatePassword").post(authJWT, changeCurrentPassword);
-router.route("/updateAccount").patch(authJWT, updateAccountDetails);
-router.route("/channel/:username").get(authJWT, getUserChannelProfile);
-router.route("/watchhistory").get(authJWT, getWatchHistory);
-// router.route("/getallusers").get(getAllUser);
-
+router.route("/logout").post(authJWT, logoutUser); //
+router.route("/rftoken").post(refreshAccessToken); //
+router.route("/myprofile").get(authJWT, getCurrentUserAuth); //
+router.route("/profile/:username").get(getCurrentUserByUsername); //
+router.route("/updatePassword").post(authJWT, changeCurrentPassword); //
+router.route("/updateAccount").patch(authJWT, updateAccountDetails); //
+router.route("/channel/:username").get(authJWT, getUserChannelProfile); //
+router.route("/watchHistory").get(authJWT, getWatchHistory); //
+router.route("/getallusers").get(getAllUser); //
 // router.route("/deleteuser").delete();
 //MULTER BASED ROUTE
 router

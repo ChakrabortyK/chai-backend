@@ -10,16 +10,10 @@ export const authJWT = asyncHandler(async (req, _, next) => {
             req.header("Authorization")?.replace("Bearer ", "");
 
         if (token === undefined || token === null) {
-            throw new ApiError(401, "Unauthorised Access here");
+            return next(new ApiError(401, "token not found"));
         }
 
-        const jwtData = jwt.verify(
-            token,
-            process.env.JWT_SECRET
-            // async (err, decoded) => {
-            //     console.log(decoded);
-            // }
-        );
+        const jwtData = jwt.verify(token, process.env.JWT_SECRET);
         const user = await User.findById(jwtData?._id);
 
         if (!user) {
@@ -28,10 +22,8 @@ export const authJWT = asyncHandler(async (req, _, next) => {
         req.user = user;
         next();
     } catch (error) {
-        throw new ApiError(
-            401,
-            "Unauthorised Access token ERROR",
-            error.message
+        return next(
+            new ApiError(401, error?.message || "Invalid access token")
         );
     }
 });
