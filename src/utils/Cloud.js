@@ -11,9 +11,6 @@ cloudinary.config({
 const uploadCloud = async (file) => {
     try {
         if (!file) return null;
-        // throw some error here
-
-        // console.log("Utils::Cloud::uploadCloud::file:", file);
         const response = await cloudinary.uploader.upload(file, {
             resource_type: "auto",
         });
@@ -21,8 +18,21 @@ const uploadCloud = async (file) => {
         return response;
     } catch (error) {
         fs.unlinkSync(file);
-        console.log("Utils::Cloud::uploadCloud::file upload error:", error);
+        console.log("Utils::Cloud::uploadCloud: ", error);
     }
 };
 
-export default uploadCloud;
+const deleteCloud = async (public_id, resource_type) => {
+    if (!public_id) return null;
+    try {
+        return await cloudinary.uploader.destroy(public_id, {
+            resource_type,
+        });
+    } catch (error) {
+        console.log("Utils::Cloud::deleteCloud: ", error);
+
+        return null;
+    }
+};
+
+export { uploadCloud, deleteCloud };
